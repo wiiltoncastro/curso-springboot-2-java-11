@@ -1,11 +1,14 @@
 package com.educandoweb.workshop.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable{
@@ -20,6 +23,9 @@ public class Usuario implements Serializable{
 	private String email;
 	private String telefone;
 	private String senha;
+	
+	@OneToMany(mappedBy = "cliente")
+	List<Pedido> listaPedidos = new ArrayList<>();
 	
 	//construtor
 	public Usuario() {
@@ -67,6 +73,11 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 	
+	@OneToMany(mappedBy = "cliente")
+	public List<Pedido> getListaPedidos() {
+		return listaPedidos;
+	}
+
 	//hashCode e equals
 	@Override
 	public int hashCode() {
