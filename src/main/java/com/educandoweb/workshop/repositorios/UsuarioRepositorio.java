@@ -8,6 +8,4 @@ import com.educandoweb.workshop.entidades.Usuario;
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long>{
 
-	
-	
 }

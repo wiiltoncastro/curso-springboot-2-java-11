@@ -101,11 +101,4 @@ public class Pedido implements Serializable{
 			return false;
 		return true;
 	}
-
-	//toString
-	@Override
-	public String toString() {
-		return "Pedido [id=" + id + ", momento=" + momento + ", pedidoStatus=" + pedidoStatus + ", cliente=" + cliente
-				+ "]";
-	}
 }

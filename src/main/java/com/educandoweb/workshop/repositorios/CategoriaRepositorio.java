@@ -3,9 +3,9 @@ package com.educandoweb.workshop.repositorios;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.educandoweb.workshop.entidades.Pedido;
+import com.educandoweb.workshop.entidades.Categoria;
 
 @Repository
-public interface PedidoRepositorio extends JpaRepository<Pedido, Long>{
+public interface CategoriaRepositorio extends JpaRepository<Categoria, Long>{
 
 }

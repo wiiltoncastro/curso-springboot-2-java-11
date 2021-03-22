@@ -9,9 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.educandoweb.workshop.entidades.Categoria;
 import com.educandoweb.workshop.entidades.Pedido;
 import com.educandoweb.workshop.entidades.Usuario;
 import com.educandoweb.workshop.entidades.enuns.PedidoStatus;
+import com.educandoweb.workshop.repositorios.CategoriaRepositorio;
 import com.educandoweb.workshop.repositorios.PedidoRepositorio;
 import com.educandoweb.workshop.repositorios.UsuarioRepositorio;
 
@@ -24,9 +26,16 @@ public class TestConfiguracao implements CommandLineRunner{
 		
 		@Autowired
 		private PedidoRepositorio pedidoRepositorio;
+		
+		@Autowired
+		private CategoriaRepositorio categoriaRepositorio;
 
 		@Override
 		public void run(String... args) throws Exception {
+
+			Categoria c1 = new Categoria(null, "Eletronicos");
+			Categoria c2 = new Categoria(null, "Livros");
+			Categoria c3 = new Categoria(null, "Computadores");
 
 			Usuario u1 = new Usuario(null, "Maria Brown", "maria@gmail.com", "99999999", "123456");
 			Usuario u2 = new Usuario(null, "Alex Green", "alex@gmail.com", "88888888", "123456");
@@ -35,6 +44,7 @@ public class TestConfiguracao implements CommandLineRunner{
 			Pedido p2 = new Pedido(null, Instant.parse("2019-07-21T03:42:10Z"), PedidoStatus.ESPERANDO_PAGAMENTO, u2);
 			Pedido p3 = new Pedido(null, Instant.parse("2019-07-22T15:21:22Z"), PedidoStatus.ESPERANDO_PAGAMENTO, u1);
 			
+			categoriaRepositorio.saveAll(Arrays.asList(c1, c2, c3));
 			usuarioRepositorio.saveAll(Arrays.asList(u1, u2));
 			pedidoRepositorio.saveAll(Arrays.asList(p1,p2,p3));
 			
