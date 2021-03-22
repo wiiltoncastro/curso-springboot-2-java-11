@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.educandoweb.workshop.entidades.enuns.PedidoStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -24,6 +25,8 @@ public class Pedido implements Serializable{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant momento;
 	
+	private Integer pedidoStatus;
+	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Usuario cliente;
@@ -33,10 +36,11 @@ public class Pedido implements Serializable{
 		super();
 	}
 
-	public Pedido(Long id, Instant momento, Usuario cliente) {
+	public Pedido(Long id, Instant momento, PedidoStatus pedidoStatus, Usuario cliente) {
 		super();
 		this.id = id;
 		this.momento = momento;
+		setPedidoStatus(pedidoStatus);
 		this.cliente = cliente;
 	}
 
@@ -55,6 +59,16 @@ public class Pedido implements Serializable{
 
 	public Usuario getCliente() {
 		return cliente;
+	}
+	
+	public PedidoStatus getPedidoStatus() {
+		return PedidoStatus.valorDe(pedidoStatus);
+	}
+
+	public void setPedidoStatus(PedidoStatus pedidoStatus) {
+		if(pedidoStatus != null) {
+			this.pedidoStatus = pedidoStatus.getCodigo();
+		}
 	}
 
 	public void setCliente(Usuario cliente) {
@@ -91,8 +105,7 @@ public class Pedido implements Serializable{
 	//toString
 	@Override
 	public String toString() {
-		return "Pedido [id=" + id + ", momento=" + momento + ", cliente=" + cliente + "]";
+		return "Pedido [id=" + id + ", momento=" + momento + ", pedidoStatus=" + pedidoStatus + ", cliente=" + cliente
+				+ "]";
 	}
-	
-	
 }
