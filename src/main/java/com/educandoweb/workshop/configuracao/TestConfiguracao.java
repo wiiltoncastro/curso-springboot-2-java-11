@@ -37,6 +37,7 @@ public class TestConfiguracao implements CommandLineRunner{
 		@Override
 		public void run(String... args) throws Exception {
 
+			//instaciando os objetos
 			Categoria c1 = new Categoria(null, "Eletronicos");
 			Categoria c2 = new Categoria(null, "Livros");
 			Categoria c3 = new Categoria(null, "Computadores");
@@ -55,10 +56,23 @@ public class TestConfiguracao implements CommandLineRunner{
 			Pedido ped2 = new Pedido(null, Instant.parse("2019-07-21T03:42:10Z"), PedidoStatus.ESPERANDO_PAGAMENTO, u2);
 			Pedido ped3 = new Pedido(null, Instant.parse("2019-07-22T15:21:22Z"), PedidoStatus.ESPERANDO_PAGAMENTO, u1);
 			
+			//salvando no banco de dados
 			categoriaRepositorio.saveAll(Arrays.asList(c1, c2, c3));
 			usuarioRepositorio.saveAll(Arrays.asList(u1, u2));
 			pedidoRepositorio.saveAll(Arrays.asList(ped1,ped2,ped3));
 			produtoRepositorio.saveAll(Arrays.asList(pro1, pro2, pro3, pro4, pro5));
+			
+			//atribuindo produto com sua categoria
+			pro1.getCategorias().add(c2);
+			pro2.getCategorias().add(c1);
+			pro2.getCategorias().add(c3);
+			pro3.getCategorias().add(c3);
+			pro4.getCategorias().add(c3);
+			pro5.getCategorias().add(c2);
+			
+			//salvar novamente os produtos atribuidos com as categorias
+			produtoRepositorio.saveAll(Arrays.asList(pro1, pro2, pro3, pro4, pro5));
+			
 			
 		}
 	
